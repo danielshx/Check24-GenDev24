@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// npx prisma db push
+// npx prisma studio
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int              @id @default(autoincrement())
+  username    String           @unique
+  pins        Pin[]            @relation("UserPins")
+  pinned      Pin[]            @relation("PinnedUsers")
+  bets        Bet[]
+  memberships CommunityMembership[]
+}
+
+model Community {
+  id          Int                   @id @default(autoincrement())
+  name        String
+  pins        Pin[]
+  members     CommunityMembership[]
+}
+
+model Pin {
+  id          Int                   @id @default(autoincrement())
+  user_id          Int
+  pinned_user_id   Int
+  community_id     Int
+  user             User       @relation("UserPins", fields: [user_id], references: [id])
+  pinnedUser       User       @relation("PinnedUsers", fields: [pinned_user_id], references: [id])
+  community        Community  @relation(fields: [community_id], references: [id])
+
+  @@unique([community_id, user_id, pinned_user_id])
+}
+
+model Match {
+  id          Int      @id @default(autoincrement())
+  home_team   Int
+  away_team   Int
+  result_home Int?
+  result_away Int?
+  start_date  DateTime
+  TeamHome    Team     @relation("TeamHome", fields: [home_team], references: [id])
+  TeamAway    Team     @relation("TeamAway", fields: [away_team], references: [id])
+  bets        Bet[]
+}
+
+model Team {
+  id           Int      @id @default(autoincrement())
+  name         String
+  code         String
+  HomeMatches  Match[]  @relation("TeamHome")
+  AwayMatches  Match[]  @relation("TeamAway")
+}
+
+model Bet {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  match_id    Int
+  result_home Int
+  result_away Int
+  user        User     @relation(fields: [user_id], references: [id])
+  match       Match    @relation(fields: [match_id], references: [id])
+
+  @@unique([user_id, match_id])  // Ensure a user can only bet once on a specific match
+}
+
+model CommunityMembership {
+  id           Int        @id @default(autoincrement())
+  user_id      Int
+  community_id Int
+  user         User       @relation(fields: [user_id], references: [id])
+  community    Community  @relation(fields: [community_id], references: [id])
+
+  @@unique([user_id, community_id]) // Ensure unique membership
+}
