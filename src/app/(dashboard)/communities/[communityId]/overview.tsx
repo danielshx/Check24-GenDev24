@@ -92,6 +92,8 @@ const TableContent: React.FC<{
       .then((res) => res.json())
       .then((data) => {
         // append
+        if (!data.leaderboard) return;
+        if (data.leaderboard.length === 0) return;
         setLeaderboard([...leaderboard, ...data.leaderboard]);
 
         /*const newData = [...leaderboard, ...data.leaderboard];
