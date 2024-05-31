@@ -1,4 +1,4 @@
-# Check24-Stipendium-Tippspiel
+# Check24-Stipendium-Tippspiel (created by Daniel Shamsi)
 This is my Application Project for the GenDev2024 Scholarship, i hope you like it.
 
 You can find a small presentation of my Project 
