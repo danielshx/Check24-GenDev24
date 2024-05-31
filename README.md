@@ -4,6 +4,14 @@ This is my Application Project for the GenDev2024 Scholarship, i hope you like i
 You can find a small presentation of my Project 
 https://youtu.be/EF_t9loiOQg
 
+Some possible optimizations:
+- less redundancy
+- better use of server side rendering
+- more consistent ui components
+- loading animations
+- better ux
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
