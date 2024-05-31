@@ -1,7 +1,7 @@
 # Check24-Stipendium-Tippspiel
 This is my Application Project for the GenDev2024 Scholarship, i hope you like it.
 
-You can find a small presentation of my Project [here](https://youtu.be/EF_t9loiOQg) 
+You can find a small presentation of my Project 
 https://youtu.be/EF_t9loiOQg
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
